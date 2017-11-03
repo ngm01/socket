@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var socket = io.connect();
+            socket.on('updated_message', function(results){
+                if(results){
+                $('#survey_results').append(
+                    "<p>Your name is: "+ results.name +"</p>"+
+                   "<p>Your location is: "+ results.location +"</p>"+
+                    "<p>Your favorite language is: "+ results.language +"</p>"+
+                    "<p>Your comment was: "+ results.comment +"</p>"+
+                    "<p>Your lucky number emitted by the server is: "+ results.number +"</p>"
+                );
+                }
+            })
+            $('#clickMe').click(function(){
+                socket.emit("posting_form", 
+                {
+                name: $("input[name='name']").val(),
+                location: $("select[name='location']").val(),
+                language: $("select[name='language']").val(),
+                comment: $("textarea[name='comment']").val()
+                });
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="survey_results">
+        <!-- Button click fills in this div -->
+    </div>
+    <fieldset>
+        <form>
+        <legend>Dojo Survey</legend>
+        <label for="name">Name:</label>
+        <input type="text" name="name">
+
+        <label for="location">Location:</label>
+        <select name="location">
+            <option value="Washington D.C.">Washington, D.C.</option>
+            <option value="San Jose">San Jose</option>
+            <option value="Mars">Mars</option>
+        </select>
+
+        <label for="language">Favorite Language:</label>
+        <select name="language">
+            <option value='Python'>Python</option>
+            <option value='JavaScript'>JavaScript</option>
+            <option value='CSS'>CSS</option>
+        </select>
+
+        <label for="comment">Comment (optional):</label>
+        <textarea name="comment"></textarea>
+
+        <!-- have jquery select this button by id rather than tag -->
+        <!--  -->
+        <button id="clickMe">Submit</button>
+        </form>
+    </fieldset>
+</body>
+</html>
