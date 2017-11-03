@@ -20,12 +20,8 @@ io.sockets.on('connection', function(socket){
     //server socket code goes here...
     socket.emit('updated_message', results);
     socket.on('posting_form', function(data){
-        // console.log("Just data:",data);
-        // console.log("data.test:",data.test);
-        console.log("Are we getting comment?", data.comment);
         results = data;
         results.number = Math.floor(Math.random() * 1001);
-        console.log(results);
         
     })
 })
