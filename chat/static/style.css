@@ -1,0 +1,34 @@
+/* These are divs */
+#main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#chatroom{
+    height: 300px;
+    width: 500px;
+    overflow: auto;
+}
+
+#input{
+    width: 500px;
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+textarea{
+    width: 400px;
+}
+
+#post-msg{
+    /* This is the button */
+    margin-top: 5px;
+    padding: 10px;
+    height: 10px;
+    width: 50px;
+    line-height: 2px;
+}
